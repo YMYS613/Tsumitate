@@ -117,6 +117,24 @@ body {
   margin-bottom: 48px;
 }
 
+.article-meta,
+.tool-meta {
+  color: var(--muted);
+  display: block;
+  font-size: 12px;
+  line-height: 1.7;
+  margin-left: auto;
+  margin-bottom: 24px;
+  text-align: right;
+  width: 100%;
+}
+.article-meta p,
+.tool-meta p {
+  display: block;
+  margin: 0;
+  text-align: right;
+}
+
 .notice-box {
   background: #fffefd;
   border: 1px solid var(--border);
