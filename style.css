@@ -104,6 +104,21 @@ body {
   color: #66584f;
 }
 
+.notice-box {
+  background: #fffefd;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--green);
+  border-radius: 0 8px 8px 0;
+  padding: 18px 22px;
+  margin-bottom: 44px;
+}
+.notice-box p {
+  color: #66584f;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
 h2 {
   font-family: 'Noto Serif JP', serif;
   font-size: clamp(20px, 3vw, 26px);
