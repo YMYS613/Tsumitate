@@ -21,7 +21,6 @@ body {
   font-size: 16px;
 }
 
-/* 記事ページ */
 .hero {
   background: var(--hero);
   color: var(--ink);
@@ -83,27 +82,6 @@ body {
   margin-bottom: 48px;
 }
 
-.author-note {
-  background: var(--accent-light);
-  border-radius: 12px;
-  padding: 24px 28px;
-  margin-bottom: 48px;
-  position: relative;
-}
-.author-note::before {
-  content: '✍️ 著者より';
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-.author-note p {
-  font-size: 15px;
-  color: #66584f;
-}
-
 .notice-box {
   background: #fffefd;
   border: 1px solid var(--border);
@@ -146,185 +124,6 @@ h3 {
 
 p { margin-bottom: 20px; }
 
-.point-box {
-  background: #fffefd;
-  border: 1px solid var(--border);
-  border-top: 4px solid var(--accent);
-  border-radius: 0 0 8px 8px;
-  padding: 28px 32px;
-  margin: 32px 0;
-}
-.point-box .point-title {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--accent);
-  margin-bottom: 16px;
-}
-.point-box ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.point-box li {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  font-size: 15px;
-}
-.point-box li .num {
-  background: var(--accent);
-  color: white;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.compare-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 28px 0;
-  font-size: 14px;
-}
-.compare-table th {
-  background: #f2bda4;
-  color: #4c4039;
-  padding: 12px 16px;
-  text-align: left;
-  font-weight: 500;
-}
-.compare-table td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--border);
-}
-.compare-table tr:nth-child(even) td { background: #fff2ec; }
-.badge {
-  display: inline-block;
-  background: var(--green-light);
-  color: var(--green);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-}
-
-.qa-block {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 24px 0;
-}
-.qa-q {
-  background: #f2bda4;
-  color: #4c4039;
-  padding: 14px 20px;
-  font-size: 15px;
-  font-weight: 500;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.qa-q .q-label {
-  background: var(--accent);
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.qa-a {
-  padding: 16px 20px;
-  font-size: 15px;
-  background: #fffefd;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.qa-a .a-label {
-  background: var(--green);
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 4px;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.experience {
-  background: #fff0e5;
-  color: var(--ink);
-  border-radius: 12px;
-  padding: 32px;
-  margin: 40px 0;
-  position: relative;
-}
-.experience::before {
-  content: '"';
-  font-family: Georgia, serif;
-  font-size: 80px;
-  color: var(--accent);
-  position: absolute;
-  top: 8px;
-  left: 24px;
-  line-height: 1;
-  opacity: 0.6;
-}
-.experience p {
-  padding-left: 16px;
-  font-size: 15px;
-  line-height: 1.9;
-  color: #66584f;
-}
-.experience .exp-label {
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  color: var(--accent);
-  font-weight: 700;
-  margin-bottom: 12px;
-  padding-left: 16px;
-}
-
-.cta-box {
-  background: linear-gradient(135deg, #f6c8b7 0%, #f2d7a8 100%);
-  color: var(--ink);
-  border-radius: 16px;
-  padding: 40px 36px;
-  text-align: center;
-  margin-top: 56px;
-}
-.cta-box h2 {
-  font-family: 'Noto Serif JP', serif;
-  font-size: clamp(20px, 3vw, 26px);
-  margin: 0 0 16px;
-  border: none;
-  color: var(--ink);
-}
-.cta-box h2::after { display: none; }
-.cta-box p {
-  font-size: 15px;
-  color: #6f5d52;
-  margin-bottom: 0;
-}
-.cta-accent {
-  color: var(--accent);
-  font-size: 32px;
-  font-family: 'Noto Serif JP', serif;
-  font-weight: 700;
-  display: block;
-  margin: 16px 0;
-}
-
 .disclaimer {
   margin-top: 48px;
   padding: 16px 20px;
@@ -333,14 +132,6 @@ p { margin-bottom: 20px; }
   font-size: 12px;
   color: var(--muted);
   line-height: 1.7;
-}
-
-.writer-card {
-  margin-top: 32px;
-  padding: 28px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #fffefd;
 }
 
 .related-articles {
@@ -379,50 +170,8 @@ p { margin-bottom: 20px; }
   font-size: 13px;
   line-height: 1.7;
 }
-.related-link:hover span {
-  color: #9b623f;
-}
+.related-link:hover span { color: #9b623f; }
 
-.writer-label {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--accent);
-  margin-bottom: 18px;
-}
-.writer-body {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-}
-.writer-avatar,
-.profile-avatar {
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f6c8b7 0%, #f2d7a8 100%);
-  color: #7b533f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Noto Serif JP', serif;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-.writer-avatar {
-  width: 64px;
-  height: 64px;
-  font-size: 24px;
-}
-.writer-name {
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-.writer-text {
-  font-size: 14px;
-  color: #66584f;
-  line-height: 1.8;
-  margin-bottom: 12px;
-}
 .writer-link,
 .back-link {
   color: #9b623f;
@@ -436,39 +185,27 @@ p { margin-bottom: 20px; }
   border-bottom-color: #9b623f;
 }
 
-.simulator-section {
-  margin-top: 48px;
-  border: 1px solid var(--border);
-  border-top: 4px solid var(--accent);
-  border-radius: 0 0 12px 12px;
-  overflow: hidden;
-  background: #fffefd;
-}
-.simulator-label {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: var(--accent);
-  padding: 20px 28px 4px;
-}
-.simulator-desc {
-  font-size: 14px;
-  color: var(--muted);
-  padding: 0 28px 16px;
-  margin: 0;
-}
-.simulator-wrapper {
-  width: 100%;
-  border-top: 1px solid var(--border);
-}
-.simulator-wrapper iframe {
-  width: 100%;
-  height: 620px;
+.diagnosis-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
   border: none;
-  display: block;
+  border-radius: 999px;
+  padding: 15px 34px;
+  background: var(--green);
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.diagnosis-button:hover { background: #5f8668; }
+.diagnosis-cta-actions {
+  display: flex;
+  padding: 0 28px 24px;
 }
 
-/* プロフィールページ */
 .profile-wrap {
   max-width: 720px;
   margin: 0 auto;
@@ -486,6 +223,18 @@ p { margin-bottom: 20px; }
   gap: 20px;
   align-items: center;
   margin-bottom: 28px;
+}
+.writer-avatar,
+.profile-avatar {
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f6c8b7 0%, #f2d7a8 100%);
+  color: #7b533f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 .profile-avatar {
   width: 78px;
@@ -509,7 +258,6 @@ p { margin-bottom: 20px; }
   margin-bottom: 18px;
 }
 
-/* 固定ページ */
 .legal-wrap {
   max-width: 760px;
   margin: 0 auto;
@@ -540,9 +288,7 @@ p { margin-bottom: 20px; }
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border);
 }
-.legal-card h2::after {
-  display: none;
-}
+.legal-card h2::after { display: none; }
 .legal-card p {
   color: #66584f;
   font-size: 15px;
@@ -575,9 +321,7 @@ p { margin-bottom: 20px; }
   font-weight: 700;
   text-decoration: none;
 }
-.contact-button:hover {
-  background: #d7815b;
-}
+.contact-button:hover { background: #d7815b; }
 
 .site-footer {
   border-top: 1px solid var(--border);
@@ -615,14 +359,13 @@ p { margin-bottom: 20px; }
 .hero-sub { animation-delay: 0.4s; }
 
 @media (max-width: 600px) {
-  .compare-table { font-size: 13px; }
-  .compare-table th, .compare-table td { padding: 10px 12px; }
-  .point-box { padding: 20px; }
-  .experience { padding: 28px 20px; }
-  .cta-box { padding: 32px 20px; }
-  .writer-card { padding: 22px; }
-  .writer-body { flex-direction: column; }
   .profile-card { padding: 28px 22px; }
   .profile-head { align-items: flex-start; }
   .legal-card { padding: 28px 22px; }
+  .diagnosis-cta-actions {
+    padding: 0 22px 22px;
+  }
+  .diagnosis-cta-actions .diagnosis-button {
+    width: 100%;
+  }
 }

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NISA口座おすすめ診断｜初心者向けに口座選びの候補をチェック</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/common.css">
+<link rel="stylesheet" href="../assets/css/tool.css">
+</head>
+<body>
+
+<div class="hero tool-hero">
+  <div class="hero-tag">NISA Account Finder</div>
+  <h1>NISA口座おすすめ診断</h1>
+  <p class="hero-sub">よく使うポイントや、投資でやりたいことから、候補になりやすい証券口座を整理します。</p>
+</div>
+
+<main class="container">
+
+  <p class="lead">
+    証券口座は、手数料や商品数だけでなく、スマホの使いやすさ、クレカ積立、ポイントとの相性でも選びやすさが変わります。6つの質問に答えて、あなたに合いそうな候補を見てみましょう。
+  </p>
+
+  <div class="notice-box">
+    <p>この診断は、NISA口座選びの考え方を整理するためのサンプルツールです。特定の証券会社や金融商品を推奨するものではありません。サービス内容、手数料、ポイント制度、キャンペーンは変更される場合があるため、申し込み前に各社の公式情報をご確認ください。</p>
+  </div>
+
+  <section class="diagnosis-app" aria-labelledby="diagnosis-title">
+    <div class="diagnosis-head">
+      <div>
+        <div class="tool-label">かんたん診断</div>
+        <h2 id="diagnosis-title">あなたに近いものを選んでください</h2>
+      </div>
+      <div class="progress-badge"><span id="answeredCount">0</span>/6</div>
+    </div>
+
+    <form id="diagnosisForm" class="diagnosis-form">
+      <fieldset class="question-card">
+        <legend>1. ふだんよく使うポイントは？</legend>
+        <label><input type="radio" name="points" value="rakuten" required> 楽天ポイント</label>
+        <label><input type="radio" name="points" value="vpoint"> Vポイント</label>
+        <label><input type="radio" name="points" value="dpoint"> dポイント・Pontaポイント</label>
+        <label><input type="radio" name="points" value="none"> 特に決まっていない</label>
+      </fieldset>
+
+      <fieldset class="question-card">
+        <legend>2. クレカ積立は使いたい？</legend>
+        <label><input type="radio" name="card" value="main" required> できれば普段のカードと合わせたい</label>
+        <label><input type="radio" name="card" value="reward"> ポイント還元を重視したい</label>
+        <label><input type="radio" name="card" value="simple"> まずは現金積立でもいい</label>
+      </fieldset>
+
+      <fieldset class="question-card">
+        <legend>3. 何を中心に投資したい？</legend>
+        <label><input type="radio" name="product" value="fund" required> 投資信託をコツコツ積み立てたい</label>
+        <label><input type="radio" name="product" value="stock"> 日本株や米国株も見てみたい</label>
+        <label><input type="radio" name="product" value="learn"> まだ決まっていないので、まず慣れたい</label>
+      </fieldset>
+
+      <fieldset class="question-card">
+        <legend>4. 操作画面で重視したいことは？</legend>
+        <label><input type="radio" name="ui" value="phone" required> スマホで見やすいこと</label>
+        <label><input type="radio" name="ui" value="pc"> PCでじっくり調べやすいこと</label>
+        <label><input type="radio" name="ui" value="simple"> 迷わず設定できること</label>
+      </fieldset>
+
+      <fieldset class="question-card">
+        <legend>5. 口座選びでいちばん気になることは？</legend>
+        <label><input type="radio" name="priority" value="lineup" required> 商品ラインナップの多さ</label>
+        <label><input type="radio" name="priority" value="points"> ポイントの使いやすさ</label>
+        <label><input type="radio" name="priority" value="support"> 初心者でも迷いにくいこと</label>
+      </fieldset>
+
+      <fieldset class="question-card">
+        <legend>6. 今の気持ちに近いものは？</legend>
+        <label><input type="radio" name="style" value="compare" required> いくつか比較して納得して選びたい</label>
+        <label><input type="radio" name="style" value="quick"> できるだけ早く始めたい</label>
+        <label><input type="radio" name="style" value="careful"> もう少し勉強してから決めたい</label>
+      </fieldset>
+
+      <div class="diagnosis-actions">
+        <button class="diagnosis-button" type="submit">診断結果を見る</button>
+        <button class="diagnosis-reset" type="button" id="resetDiagnosis">リセット</button>
+      </div>
+    </form>
+
+    <section class="result-panel" id="resultPanel" aria-live="polite" hidden>
+      <div class="result-kicker">診断結果</div>
+      <h2 id="resultTitle">候補を表示します</h2>
+      <p id="resultLead"></p>
+      <div class="result-list" id="resultList"></div>
+      <div class="result-note">
+        最終的には、NISA対象商品の取扱い、積立方法、手数料、ポイント条件、キャンペーンの適用条件を公式サイトで確認してください。
+      </div>
+    </section>
+  </section>
+
+  <div class="related-articles">
+    <div class="related-label">関連記事</div>
+    <a class="related-link" href="../articles/kouza.html">
+      <span>証券口座ってどう選ぶ？初心者の私が使って感じたポイント</span>
+      <small>スマホ画面、クレカ積立、ポイント投資など、使って感じた選び方をまとめました。</small>
+    </a>
+    <a class="related-link" href="../articles/nisa-monthly.html">
+      <span>新NISAで月いくら積み立てる？子育て中の主婦が家計目線で考えてみた</span>
+      <small>口座を作ったあと、無理なく続けられる積立額を考える記事です。</small>
+    </a>
+    <a class="related-link" href="../articles/nisa.html">
+      <span>新NISAってなに？旧NISAから続けている主婦がやさしく解説</span>
+      <small>NISA制度の基本を、家計目線でやさしく整理しています。</small>
+    </a>
+  </div>
+
+  <div class="disclaimer">
+    ※このページは情報提供を目的としたサンプル診断です。投資には元本割れのリスクがあります。特定の証券会社、金融商品、投資方法を推奨するものではありません。
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <nav class="footer-links" aria-label="フッターリンク">
+    <a href="../pages/profile.html">プロフィール</a>
+    <a href="../pages/privacy.html">プライバシーポリシー</a>
+    <a href="../pages/disclaimer.html">免責事項</a>
+    <a href="../pages/contact.html">お問い合わせ</a>
+  </nav>
+  <small>&copy; 2026 Tsumitate Lab. All rights reserved.</small>
+</footer>
+
+<script>
+const brokers = {
+  sbi: {
+    name: 'SBI証券',
+    tag: '商品数や総合力を重視したい人の候補',
+    url: '#',
+    reasons: [
+      '投資信託だけでなく、国内株や米国株も見たい人に向いています。',
+      'Vポイントなど、ポイント連携を使いたい人の候補になります。',
+      '比較して納得して選びたい人にも検討しやすい総合型です。'
+    ]
+  },
+  rakuten: {
+    name: '楽天証券',
+    tag: '楽天経済圏やスマホの見やすさを重視したい人の候補',
+    url: '#',
+    reasons: [
+      '楽天ポイントを普段から使う人は、生活圏と合わせて考えやすいです。',
+      '投資信託の積立や残高確認をスマホで進めたい人の候補になります。',
+      'まずは身近なポイントから投資に慣れたい人にも検討しやすいです。'
+    ]
+  },
+  monex: {
+    name: 'マネックス証券',
+    tag: 'クレカ積立や米国株にも興味がある人の候補',
+    url: '#',
+    reasons: [
+      'クレカ積立のポイント面を重視したい人の比較候補になります。',
+      '投資信託だけでなく、米国株にも関心がある人に向いています。',
+      '複数社を比べて条件を見たい人がチェックしやすい口座です。'
+    ]
+  },
+  matsui: {
+    name: '松井証券',
+    tag: 'シンプルさや初心者向けサポートを重視したい人の候補',
+    url: '#',
+    reasons: [
+      'PCでじっくり確認したい人や、画面のわかりやすさを重視する人の候補です。',
+      '投資にまだ慣れていない人が、落ち着いて比較しやすい選択肢です。',
+      '個別株にも少しずつ触れてみたい人にも検討しやすいです。'
+    ]
+  },
+  au: {
+    name: 'auカブコム証券',
+    tag: 'Pontaポイントやau経済圏と合わせたい人の候補',
+    url: '#',
+    reasons: [
+      'Pontaポイントやau系サービスをよく使う人は、相性を確認したい候補です。',
+      'クレカ積立を生活圏に合わせたい人に検討しやすいです。',
+      '投資信託の積立をポイント活用と一緒に考えたい人に向いています。'
+    ]
+  }
+};
+
+const weights = {
+  points: {
+    rakuten: { rakuten: 5 },
+    vpoint: { sbi: 5 },
+    dpoint: { au: 3, monex: 2 },
+    none: { sbi: 2, rakuten: 2, matsui: 2 }
+  },
+  card: {
+    main: { rakuten: 2, sbi: 2, au: 2 },
+    reward: { monex: 3, sbi: 2, rakuten: 2 },
+    simple: { matsui: 3, rakuten: 1 }
+  },
+  product: {
+    fund: { sbi: 3, rakuten: 3, monex: 2 },
+    stock: { sbi: 3, monex: 3, matsui: 2 },
+    learn: { rakuten: 2, matsui: 3 }
+  },
+  ui: {
+    phone: { rakuten: 3, sbi: 2, au: 1 },
+    pc: { matsui: 3, sbi: 2, monex: 1 },
+    simple: { rakuten: 2, matsui: 2, au: 1 }
+  },
+  priority: {
+    lineup: { sbi: 4, monex: 2, rakuten: 2 },
+    points: { rakuten: 3, sbi: 3, au: 2 },
+    support: { matsui: 3, rakuten: 2 }
+  },
+  style: {
+    compare: { sbi: 2, monex: 2, rakuten: 1 },
+    quick: { rakuten: 3, sbi: 2 },
+    careful: { matsui: 2, sbi: 1, rakuten: 1 }
+  }
+};
+
+const form = document.getElementById('diagnosisForm');
+const answeredCount = document.getElementById('answeredCount');
+const resultPanel = document.getElementById('resultPanel');
+const resultTitle = document.getElementById('resultTitle');
+const resultLead = document.getElementById('resultLead');
+const resultList = document.getElementById('resultList');
+const resetButton = document.getElementById('resetDiagnosis');
+const questionNames = ['points', 'card', 'product', 'ui', 'priority', 'style'];
+
+function updateAnsweredCount() {
+  const answered = questionNames.filter((name) => form.elements[name].value).length;
+  answeredCount.textContent = answered;
+}
+
+function buildScores(data) {
+  const scores = { sbi: 0, rakuten: 0, monex: 0, matsui: 0, au: 0 };
+  questionNames.forEach((name) => {
+    const answer = data.get(name);
+    const answerWeights = weights[name][answer] || {};
+    Object.entries(answerWeights).forEach(([broker, point]) => {
+      scores[broker] += point;
+    });
+  });
+  return Object.entries(scores)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3);
+}
+
+function renderResults(results) {
+  const [top] = results;
+  resultTitle.textContent = `${brokers[top[0]].name} が候補になりそうです`;
+  resultLead.textContent = '回答内容から見ると、まずは下の候補を比較してみると選びやすそうです。';
+  resultList.innerHTML = results.map(([key, score], index) => {
+    const broker = brokers[key];
+    const rank = index + 1;
+    const reasons = broker.reasons.map((reason) => `<li>${reason}</li>`).join('');
+    return `
+      <article class="broker-result">
+        <div class="broker-rank">候補 ${rank}</div>
+        <div class="broker-score">${score}点</div>
+        <h3>${broker.name}</h3>
+        <p class="broker-tagline">${broker.tag}</p>
+        <ul>${reasons}</ul>
+        <a class="broker-link" href="${broker.url}">公式サイトで確認する</a>
+      </article>
+    `;
+  }).join('');
+  resultPanel.hidden = false;
+  resultPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+form.addEventListener('change', updateAnsweredCount);
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const data = new FormData(form);
+  renderResults(buildScores(data));
+});
+
+resetButton.addEventListener('click', () => {
+  form.reset();
+  updateAnsweredCount();
+  resultPanel.hidden = true;
+  resultList.innerHTML = '';
+});
+</script>
+</body>
+</html>

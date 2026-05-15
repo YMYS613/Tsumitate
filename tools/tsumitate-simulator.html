@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>積立シミュレーター</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/common.css">
+<link rel="stylesheet" href="../assets/css/tool.css">
+</head>
+<body class="tool-embed-page">
+  <main class="simulator-app" aria-labelledby="simulator-title">
+    <h1 id="simulator-title">積立シミュレーター</h1>
+    <p class="simulator-tool-description">
+      毎月の積立額・想定年利・積立年数を入力すると、将来の資産額をざっくり計算できます。
+    </p>
+
+    <div class="simulator-form">
+      <div class="simulator-field">
+        <label for="monthlyAmount">毎月の積立額</label>
+        <div class="simulator-input-row">
+          <input type="number" id="monthlyAmount" value="100000" min="0">
+          <span class="simulator-unit">円</span>
+        </div>
+      </div>
+
+      <div class="simulator-field">
+        <label for="annualRate">想定年利</label>
+        <div class="simulator-input-row">
+          <input type="number" id="annualRate" value="5" min="0" step="0.1">
+          <span class="simulator-unit">%</span>
+        </div>
+      </div>
+
+      <div class="simulator-field">
+        <label for="years">積立年数</label>
+        <div class="simulator-input-row">
+          <input type="number" id="years" value="20" min="1">
+          <span class="simulator-unit">年</span>
+        </div>
+      </div>
+
+      <button class="simulator-button" type="button" id="calculateButton">計算する</button>
+    </div>
+
+    <section id="result" class="simulator-result" aria-live="polite" hidden>
+      <h2>計算結果</h2>
+
+      <div class="simulator-result-item">
+        <span class="simulator-result-label">元本</span>
+        <span id="principal" class="simulator-result-value">-</span>
+      </div>
+
+      <div class="simulator-result-item">
+        <span class="simulator-result-label">運用後の金額</span>
+        <span id="futureValue" class="simulator-result-value">-</span>
+      </div>
+
+      <div class="simulator-result-item">
+        <span class="simulator-result-label">運用益</span>
+        <span id="profit" class="simulator-result-value">-</span>
+      </div>
+
+      <div class="simulator-chart-area">
+        <canvas id="assetChart"></canvas>
+        <div class="simulator-legend">
+          <div class="simulator-legend-item">
+            <span class="simulator-legend-color principal-color"></span>
+            <span>元本</span>
+          </div>
+          <div class="simulator-legend-item">
+            <span class="simulator-legend-color future-color"></span>
+            <span>運用後の金額</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="simulator-note">
+        ※税金・手数料・実際の値動きは考慮していません。将来の運用成果を保証するものではありません。
+      </p>
+    </section>
+  </main>
+
+<script>
+const calculateButton = document.getElementById('calculateButton');
+
+function formatYen(amount) {
+  return Math.round(amount).toLocaleString() + '円';
+}
+
+function formatManYen(amount) {
+  return Math.round(amount / 10000).toLocaleString() + '万円';
+}
+
+function calculateFutureValue(monthlyAmount, annualRate, months) {
+  const monthlyRate = annualRate / 100 / 12;
+
+  if (monthlyRate === 0) {
+    return monthlyAmount * months;
+  }
+
+  return monthlyAmount * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+}
+
+function calculate() {
+  const monthlyAmount = Number(document.getElementById('monthlyAmount').value);
+  const annualRate = Number(document.getElementById('annualRate').value);
+  const years = Number(document.getElementById('years').value);
+
+  if (monthlyAmount <= 0 || annualRate < 0 || years <= 0) {
+    alert('入力内容を確認してください。');
+    return;
+  }
+
+  const months = years * 12;
+  const principal = monthlyAmount * months;
+  const futureValue = calculateFutureValue(monthlyAmount, annualRate, months);
+  const profit = futureValue - principal;
+
+  document.getElementById('principal').textContent = formatYen(principal);
+  document.getElementById('futureValue').textContent = formatYen(futureValue);
+  document.getElementById('profit').textContent = formatYen(profit);
+  document.getElementById('result').hidden = false;
+
+  drawChart(monthlyAmount, annualRate, years);
+}
+
+function drawChart(monthlyAmount, annualRate, years) {
+  const canvas = document.getElementById('assetChart');
+  const ctx = canvas.getContext('2d');
+
+  const displayWidth = canvas.clientWidth;
+  const displayHeight = canvas.clientHeight;
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.width = displayWidth * dpr;
+  canvas.height = displayHeight * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, displayWidth, displayHeight);
+
+  const paddingLeft = 48;
+  const paddingRight = 24;
+  const paddingTop = 24;
+  const paddingBottom = 42;
+  const chartWidth = displayWidth - paddingLeft - paddingRight;
+  const chartHeight = displayHeight - paddingTop - paddingBottom;
+  const chartBottom = paddingTop + chartHeight;
+  const data = [];
+
+  for (let year = 0; year <= years; year++) {
+    const months = year * 12;
+    const principal = monthlyAmount * months;
+    const futureValue = calculateFutureValue(monthlyAmount, annualRate, months);
+
+    data.push({ year, principal, futureValue });
+  }
+
+  const maxValue = Math.max(...data.map((item) => item.futureValue));
+  const safeMaxValue = maxValue === 0 ? 1 : maxValue;
+  const safeYears = years === 0 ? 1 : years;
+
+  function getX(year) {
+    return paddingLeft + (year / safeYears) * chartWidth;
+  }
+
+  function getY(value) {
+    return chartBottom - (value / safeMaxValue) * chartHeight;
+  }
+
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  ctx.font = '12px sans-serif';
+  ctx.fillStyle = '#64748b';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+
+  for (let i = 0; i <= 4; i++) {
+    const value = (safeMaxValue / 4) * i;
+    const y = getY(value);
+
+    ctx.beginPath();
+    ctx.moveTo(paddingLeft, y);
+    ctx.lineTo(displayWidth - paddingRight, y);
+    ctx.stroke();
+    ctx.fillText(formatManYen(value), 4, y);
+  }
+
+  ctx.strokeStyle = '#cbd5e1';
+  ctx.beginPath();
+  ctx.moveTo(paddingLeft, chartBottom);
+  ctx.lineTo(displayWidth - paddingRight, chartBottom);
+  ctx.stroke();
+
+  const currentYear = new Date().getFullYear();
+  const labelCount = Math.min(years, 4);
+
+  ctx.fillStyle = '#64748b';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+
+  for (let i = 0; i <= labelCount; i++) {
+    const ratio = labelCount === 0 ? 0 : i / labelCount;
+    const yearValue = currentYear + Math.round(years * ratio);
+    const x = paddingLeft + chartWidth * ratio;
+
+    ctx.fillText(yearValue + '年', x, chartBottom + 10);
+  }
+
+  function drawLine(key, color) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+
+    data.forEach((item, index) => {
+      const x = getX(item.year);
+      const y = getY(item[key]);
+
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+
+    ctx.stroke();
+  }
+
+  drawLine('principal', '#94a3b8');
+  drawLine('futureValue', '#6f9a78');
+}
+
+calculateButton.addEventListener('click', calculate);
+
+window.addEventListener('resize', () => {
+  if (!document.getElementById('result').hidden) {
+    calculate();
+  }
+});
+</script>
+</body>
+</html>
