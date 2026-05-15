@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>老後資金ざっくりシミュレーター</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/common.css">
+<link rel="stylesheet" href="../assets/css/tool.css">
+</head>
+<body class="tool-embed-page">
+  <main class="simulator-app retirement-app" aria-labelledby="retirement-title">
+    <h1 id="retirement-title">老後資金ざっくりシミュレーター</h1>
+    <p class="simulator-tool-description">
+      老後の生活費と年金見込み額を仮で置いて、「今から毎月いくら積み立てると近づけそうか」をざっくり逆算します。
+    </p>
+
+    <div class="simulator-form">
+      <div class="simulator-grid">
+        <div class="simulator-field">
+          <label for="currentAge">今の年齢</label>
+          <div class="simulator-input-row">
+            <input type="number" id="currentAge" value="40" min="18" max="100">
+            <span class="simulator-unit">歳</span>
+          </div>
+        </div>
+
+        <div class="simulator-field">
+          <label for="retirementAge">何歳まで働く予定？</label>
+          <div class="simulator-input-row">
+            <input type="number" id="retirementAge" value="65" min="40" max="100">
+            <span class="simulator-unit">歳</span>
+          </div>
+        </div>
+
+        <div class="simulator-field">
+          <label for="targetAge">何歳まで備えたい？</label>
+          <div class="simulator-input-row">
+            <input type="number" id="targetAge" value="90" min="60" max="120">
+            <span class="simulator-unit">歳</span>
+          </div>
+        </div>
+
+        <div class="simulator-field">
+          <label for="annualRate">想定年利</label>
+          <div class="simulator-input-row">
+            <input type="number" id="annualRate" value="3" min="0" max="10" step="0.1">
+            <span class="simulator-unit">%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="simulator-field">
+        <label for="currentAssets">今ある貯金・投資額</label>
+        <div class="simulator-input-row">
+          <input type="number" id="currentAssets" value="300" min="0">
+          <span class="simulator-unit">万円</span>
+        </div>
+      </div>
+
+      <div class="simulator-field">
+        <label for="livingCost">老後の生活費イメージ</label>
+        <div class="simulator-select-row">
+          <select id="livingCost">
+            <option value="200000">控えめ：月20万円</option>
+            <option value="250000" selected>標準：月25万円</option>
+            <option value="300000">ゆとり：月30万円</option>
+            <option value="custom">自分で入力</option>
+          </select>
+          <div class="simulator-input-row custom-row" id="livingCostCustomRow" hidden>
+            <input type="number" id="livingCostCustom" value="250000" min="0">
+            <span class="simulator-unit">円/月</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="simulator-field">
+        <label for="pensionIncome">年金の見込み額</label>
+        <div class="simulator-select-row">
+          <select id="pensionIncome">
+            <option value="50000">国民年金中心の目安：月5万円</option>
+            <option value="70000" selected>国民年金満額に近い目安：月7万円</option>
+            <option value="100000">少なめ：月10万円</option>
+            <option value="120000">まだわからない：月12万円</option>
+            <option value="150000">標準：月15万円</option>
+            <option value="200000">多め：月20万円</option>
+            <option value="custom">自分で入力</option>
+          </select>
+          <div class="simulator-input-row custom-row" id="pensionIncomeCustomRow" hidden>
+            <input type="number" id="pensionIncomeCustom" value="150000" min="0">
+            <span class="simulator-unit">円/月</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="simulator-button" type="button" id="calculateButton">毎月の目安を計算する</button>
+    </div>
+
+    <section id="result" class="simulator-result" aria-live="polite" hidden>
+      <div class="retirement-highlight">
+        <span class="retirement-highlight-label">今から毎月の積立目安</span>
+        <strong id="monthlyRequired">-</strong>
+      </div>
+
+      <p class="retirement-summary" id="summaryText"></p>
+
+      <div class="simulator-result-item">
+        <span class="simulator-result-label">老後の毎月不足額</span>
+        <span id="monthlyShortfall" class="simulator-result-value">-</span>
+      </div>
+
+      <div class="simulator-result-item">
+        <span class="simulator-result-label">退職後に必要な金額</span>
+        <span id="requiredRetirementFund" class="simulator-result-value">-</span>
+      </div>
+
+      <div class="simulator-result-item">
+        <span class="simulator-result-label">今ある資産の退職時イメージ</span>
+        <span id="futureCurrentAssets" class="simulator-result-value">-</span>
+      </div>
+
+      <div class="simulator-result-item">
+        <span class="simulator-result-label">退職時点の不足額</span>
+        <span id="fundingGap" class="simulator-result-value">-</span>
+      </div>
+
+      <p class="simulator-note">
+        ※これは老後資金を考え始めるための目安です。年金額、退職金、住居費、医療費、物価上昇、税金、手数料、実際の運用成績によって大きく変わります。将来の結果を保証するものではありません。
+      </p>
+    </section>
+  </main>
+
+<script>
+const calculateButton = document.getElementById('calculateButton');
+const livingCost = document.getElementById('livingCost');
+const pensionIncome = document.getElementById('pensionIncome');
+
+function formatYen(amount) {
+  return Math.round(amount).toLocaleString() + '円';
+}
+
+function formatManYen(amount) {
+  return '約' + Math.round(amount / 10000).toLocaleString() + '万円';
+}
+
+function getMonthlyValue(selectElement, customInputId) {
+  if (selectElement.value === 'custom') {
+    return Number(document.getElementById(customInputId).value);
+  }
+
+  return Number(selectElement.value);
+}
+
+function toggleCustomInput(selectElement, rowId) {
+  document.getElementById(rowId).hidden = selectElement.value !== 'custom';
+}
+
+function calculateFutureValue(lumpSum, annualRate, months) {
+  const monthlyRate = annualRate / 100 / 12;
+  return lumpSum * Math.pow(1 + monthlyRate, months);
+}
+
+function calculateMonthlyContribution(targetAmount, annualRate, months) {
+  const monthlyRate = annualRate / 100 / 12;
+
+  if (targetAmount <= 0) {
+    return 0;
+  }
+
+  if (monthlyRate === 0) {
+    return targetAmount / months;
+  }
+
+  return targetAmount * monthlyRate / (Math.pow(1 + monthlyRate, months) - 1);
+}
+
+function calculate() {
+  const currentAge = Number(document.getElementById('currentAge').value);
+  const retirementAge = Number(document.getElementById('retirementAge').value);
+  const targetAge = Number(document.getElementById('targetAge').value);
+  const annualRate = Number(document.getElementById('annualRate').value);
+  const currentAssets = Number(document.getElementById('currentAssets').value) * 10000;
+  const monthlyLivingCost = getMonthlyValue(livingCost, 'livingCostCustom');
+  const monthlyPension = getMonthlyValue(pensionIncome, 'pensionIncomeCustom');
+
+  if (
+    currentAge <= 0 ||
+    retirementAge <= currentAge ||
+    targetAge <= retirementAge ||
+    annualRate < 0 ||
+    currentAssets < 0 ||
+    monthlyLivingCost < 0 ||
+    monthlyPension < 0
+  ) {
+    alert('入力内容を確認してください。退職年齢は今の年齢より後、備えたい年齢は退職年齢より後にしてください。');
+    return;
+  }
+
+  const savingMonths = (retirementAge - currentAge) * 12;
+  const retirementMonths = (targetAge - retirementAge) * 12;
+  const monthlyShortfall = Math.max(monthlyLivingCost - monthlyPension, 0);
+  const requiredRetirementFund = monthlyShortfall * retirementMonths;
+  const futureCurrentAssets = calculateFutureValue(currentAssets, annualRate, savingMonths);
+  const fundingGap = Math.max(requiredRetirementFund - futureCurrentAssets, 0);
+  const monthlyRequired = calculateMonthlyContribution(fundingGap, annualRate, savingMonths);
+
+  document.getElementById('monthlyRequired').textContent = formatYen(monthlyRequired);
+  document.getElementById('monthlyShortfall').textContent = formatYen(monthlyShortfall);
+  document.getElementById('requiredRetirementFund').textContent = formatManYen(requiredRetirementFund);
+  document.getElementById('futureCurrentAssets').textContent = formatManYen(futureCurrentAssets);
+  document.getElementById('fundingGap').textContent = formatManYen(fundingGap);
+
+  const summary = monthlyShortfall === 0
+    ? `老後の生活費を月${formatYen(monthlyLivingCost)}、年金見込みを月${formatYen(monthlyPension)}と置くと、毎月の不足は出ない計算です。`
+    : `老後の生活費を月${formatYen(monthlyLivingCost)}、年金見込みを月${formatYen(monthlyPension)}と置くと、毎月の不足は${formatYen(monthlyShortfall)}。${retirementAge}歳から${targetAge}歳まで備える場合の目安です。`;
+
+  document.getElementById('summaryText').textContent = summary;
+  document.getElementById('result').hidden = false;
+}
+
+livingCost.addEventListener('change', () => {
+  toggleCustomInput(livingCost, 'livingCostCustomRow');
+});
+
+pensionIncome.addEventListener('change', () => {
+  toggleCustomInput(pensionIncome, 'pensionIncomeCustomRow');
+});
+
+calculateButton.addEventListener('click', calculate);
+</script>
+</body>
+</html>
