@@ -362,6 +362,11 @@ p { margin-bottom: 20px; }
   color: var(--ink);
   text-decoration: none;
 }
+.related-link + .related-link {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
 .related-link span {
   display: block;
   font-weight: 700;
@@ -467,7 +472,7 @@ p { margin-bottom: 20px; }
 .profile-wrap {
   max-width: 720px;
   margin: 0 auto;
-  padding: 64px 24px 350px;
+  padding: 64px 24px 280px;
 }
 .profile-card {
   margin-top: 28px;
