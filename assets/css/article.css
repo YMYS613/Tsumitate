@@ -266,6 +266,74 @@
   display: block;
 }
 
+.guide-section {
+  margin-top: 44px;
+}
+.guide-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.guide-card-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+.guide-card {
+  display: block;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  background: #fffefd;
+  color: var(--ink);
+  text-decoration: none;
+}
+.guide-card:hover {
+  border-left-color: var(--green);
+  background: #f8fbf5;
+}
+.guide-step {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--accent-light);
+  color: #9b623f;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.guide-card strong {
+  display: block;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.guide-card small {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 6px;
+}
+.tool-card {
+  border-left-color: var(--green);
+  background: #f8fbf5;
+}
+.tool-card .guide-step {
+  background: var(--green-light);
+  color: var(--green);
+}
+.guide-cta-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+
 @media (max-width: 600px) {
   .compare-table { font-size: 13px; }
   .compare-table th, .compare-table td { padding: 10px 12px; }
@@ -274,4 +342,6 @@
   .cta-box { padding: 32px 20px; }
   .writer-card { padding: 22px; }
   .writer-body { flex-direction: column; }
+  .guide-card { padding: 18px; }
+  .guide-cta-actions .diagnosis-button { width: 100%; }
 }
