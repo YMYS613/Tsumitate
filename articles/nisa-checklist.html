@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新NISAを始める前に、家計で確認しておきたいこと</title>
+<meta name="description" content="新NISAを始める前に家計で確認したいポイントを、子育て中の主婦目線でチェックリスト化。収支、生活防衛費、余裕資金、長期目線を整理します。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/common.css">
+<link rel="stylesheet" href="../assets/css/article.css?v=cta-navy">
+<style>
+.check-progress {
+  margin: 1.5rem 0;
+}
+.check-progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .5rem;
+  font-size: .9rem;
+  color: var(--muted-text, #6b7280);
+}
+.check-progress-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #e8eef3;
+  overflow: hidden;
+}
+.check-progress-bar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: #2f6f73;
+  transition: width .2s ease;
+}
+.check-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .8rem;
+  align-items: start;
+  padding: 1rem;
+  margin: .75rem 0;
+  border: 1px solid #dbe5ea;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+.check-card input {
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: .25rem;
+  accent-color: #2f6f73;
+}
+.check-card h3 {
+  margin: 0 0 .35rem;
+  font-size: 1rem;
+}
+.check-card p {
+  margin: 0;
+}
+.check-card small {
+  display: inline-block;
+  margin-top: .45rem;
+  color: var(--muted-text, #6b7280);
+}
+.check-card:has(input:checked) {
+  border-color: #7fb3a9;
+  background: #f3faf8;
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="site-brand" href="../index.html">つみたてラボ</a>
+  <nav class="site-nav" aria-label="サイト内メニュー">
+    <a href="../index.html">TOP</a>
+    <a href="guides/nisa-start.html">はじめての方へ</a>
+    <a href="article-list.html">記事一覧</a>
+    <a href="../tools/tool-list.html">ツールを使う</a>
+    <a href="../pages/profile.html">プロフィール</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">NISA Checklist</div>
+  <h1>新NISAを始める前に、<br>家計で確認しておきたいこと</h1>
+  <p class="hero-sub">「始めたい」と思った時に、<br>まず家計の土台を見ておくためのチェックリストです。</p>
+</div>
+
+<div class="container">
+
+  <div class="article-meta">
+    <p>公開日：2026年5月16日</p>
+    <p>更新日：2026年5月16日</p>
+  </div>
+
+  <p class="lead">
+    新NISAを始めたいと思った時、すぐに口座を作ったり商品を選んだりしたくなります。でも、子育て中の家計では、投資を始める前に見ておきたいことがいくつかあります。
+  </p>
+
+  <div class="notice-box">
+    <p>この記事は、新NISAを始める前に家計で確認したいポイントをまとめたものです。特定の金融商品や投資方法をすすめるものではありません。投資は元本保証ではなく、損失が出ることもあります。制度の最新情報は公式情報をご確認ください。</p>
+  </div>
+
+  <div class="author-note">
+    <p>私自身、投資を続けるうえで大事だと感じているのは、商品選びの前に「家計に無理がないか」を見ることです。生活費や近く使うお金まで投資に回してしまうと、相場が下がった時に気持ちも家計も苦しくなりやすいからです。</p>
+  </div>
+
+  <h2>チェックリストの前に、前提として知っておきたいこと</h2>
+
+  <p>新NISAは、投資で得た利益が非課税になる制度です。長期の資産形成に使いやすい一方で、投資である以上、値下がりすることもあります。</p>
+
+  <p>だからこそ、投資に回すお金は「当面使う予定がないお金」かどうかを考えることが大切です。日本証券業協会の投資の心構えでも、投資は余裕資金で行うことが示されています。</p>
+
+  <p>制度の内容は金融庁の<a href="https://www.fsa.go.jp/policy/nisa2/" target="_blank" rel="noopener noreferrer">NISA特設ウェブサイト</a>、投資を始める前の基本はJ-FLECの<a href="https://www.j-flec.go.jp/links/jikan/lesson5/" target="_blank" rel="noopener noreferrer">投資のはじめ方</a>や日本証券業協会の<a href="https://www.jsda.or.jp/about/hatten/inv_alerts/alearts02/alearts02-3.html" target="_blank" rel="noopener noreferrer">投資を決める際の心構え</a>も参考になります。</p>
+
+  <div class="check-progress" aria-live="polite">
+    <div class="check-progress-label">
+      <span>チェック済み</span>
+      <span id="progress-text">0 / 10</span>
+    </div>
+    <div class="check-progress-track">
+      <div class="check-progress-bar" id="progress-bar"></div>
+    </div>
+  </div>
+
+  <h2>生活の土台を確認する</h2>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>毎月の収支をざっくり把握している</h3>
+      <p>収入と支出がわからないまま投資を始めると、積立額が家計に合っているか判断しにくくなります。</p>
+      <small>まずは1ヶ月だけ、固定費と変動費をメモするだけでも十分です。</small>
+    </span>
+  </label>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>生活防衛費の目安を決めている</h3>
+      <p>急な病気、収入減、家電の買い替えなどに備える現金がないと、相場が下がった時に投資を売らざるを得なくなることがあります。</p>
+      <small>金額は家庭によって違います。まずは数ヶ月分の生活費を目安に、投資とは別に考えたいです。</small>
+    </span>
+  </label>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>高金利の借入がないか確認している</h3>
+      <p>カードローンやリボ払いなど金利が高い借入がある場合は、投資より返済を優先して考えたいです。</p>
+      <small>住宅ローンや奨学金などは金利や条件が違うため、家計全体で見ます。</small>
+    </span>
+  </label>
+
+  <h2>投資に回せるお金を確認する</h2>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>当面使う予定のないお金で始める</h3>
+      <p>数年以内に使う教育費、引っ越し費用、車の買い替え費用などは、投資に回しすぎない方が安心です。</p>
+      <small>近く使うお金は、預金など値動きの少ない形で持つことも考えたいです。</small>
+    </span>
+  </label>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>毎月の積立額を無理なく決めている</h3>
+      <p>金額は大きくなくても構いません。大切なのは、家計が苦しい時にすぐ負担にならない金額かどうかです。</p>
+      <small>月1,000円、月3,000円、月5,000円など、小さく試す選択もあります。</small>
+    </span>
+  </label>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>積立額をあとから見直していいと思えている</h3>
+      <p>家計はずっと同じではありません。教育費や収入の変化に合わせて、増やす、減らす、休むことも選択肢です。</p>
+      <small>年に一度、家計と積立額を見直すくらいの距離感でもよいと思います。</small>
+    </span>
+  </label>
+
+  <h2>近い将来の支出を確認する</h2>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>3年から5年以内の大きな支出を考えている</h3>
+      <p>入園、入学、受験、車検、家電、帰省など、近い将来の支出が見えていると、投資に回せる金額を考えやすくなります。</p>
+      <small>ざっくりしたライフイベント表を作ると、急な負担を避けやすいです。</small>
+    </span>
+  </label>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>保険料や固定費が重すぎないか見ている</h3>
+      <p>毎月の固定費が重いと、積立投資を続ける余裕が出にくくなります。投資の前に、家計の固定費を見るのも大切です。</p>
+      <small>保険は必要な保障を残しつつ、払いすぎていないか確認したいところです。</small>
+    </span>
+  </label>
+
+  <h2>気持ちの準備を確認する</h2>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>一時的に元本を下回る可能性を知っている</h3>
+      <p>投資信託は預金とは違い、元本保証ではありません。相場が下がれば、積み立てた金額より少なく見える時期もあります。</p>
+      <small>不安な時は、積立額が家計に合っているかを先に見直したいです。</small>
+    </span>
+  </label>
+
+  <label class="check-card">
+    <input type="checkbox">
+    <span>
+      <h3>長期目線で考えられそうか確認している</h3>
+      <p>短期間で大きく増やそうとすると、値下がりした時に不安になりやすいです。何年後かの自分のために、少しずつ続ける感覚が合うか見ておきたいです。</p>
+      <small>老後資金、教育費の一部、自分の将来など、目的を言葉にすると続けやすくなります。</small>
+    </span>
+  </label>
+
+  <div class="point-box">
+    <div class="point-title">POINT — 全部クリアできなくても大丈夫</div>
+    <ul>
+      <li><span class="num">1</span><span><strong>まずは収支を見る</strong>——家計の流れが見えるだけで、積立額を決めやすくなります。</span></li>
+      <li><span class="num">2</span><span><strong>生活防衛費を投資と分ける</strong>——金額は家庭ごとに違って大丈夫です。</span></li>
+      <li><span class="num">3</span><span><strong>少額から試す</strong>——完璧な準備より、無理のない形を作ることが大切です。</span></li>
+    </ul>
+  </div>
+
+  <div class="cta-box">
+    <h2>新NISAは、家計に合う形で始める</h2>
+    <span class="cta-accent">焦らず、続けられる金額から</span>
+    <p>新NISAは便利な制度ですが、家計を苦しくしてまで使うものではないと思います。収支、生活防衛費、近い将来の支出を見たうえで、当面使う予定のないお金から少しずつ。わが家に合う距離感で始めることが、長く続ける安心につながります。</p>
+  </div>
+
+  <div class="related-articles">
+    <div class="related-label">次に読むなら</div>
+    <a class="related-link" href="nisa-monthly.html">
+      <span>新NISAで月いくら積み立てる？子育て中の主婦が家計目線で考えてみた</span>
+      <small>家計に無理のない積立額を考えたい方へ。</small>
+    </a>
+    <a class="related-link" href="nisa-10000yen.html">
+      <span>新NISAは月1万円からでも意味ある？</span>
+      <small>少額から始める時のメリットと注意点です。</small>
+    </a>
+    <a class="related-link" href="market-crash.html">
+      <span>暴落したら積立投資はどうする？</span>
+      <small>相場が下がった時に慌てないための考え方です。</small>
+    </a>
+  </div>
+
+  <div class="disclaimer">
+    ※この記事は、個人の経験をもとにした情報提供を目的としています。特定の金融商品、制度、投資方法をおすすめするものではありません。投資には元本割れのリスクがあります。NISA制度や金融機関のサービス内容は変更される場合があるため、最新情報は金融庁や各金融機関の公式情報をご確認ください。
+  </div>
+
+  <div class="writer-card">
+    <div class="writer-label">この記事を書いた人</div>
+    <div class="writer-body">
+      <div class="writer-avatar">積</div>
+      <div>
+        <div class="writer-name">つみたて主婦・まゆみ</div>
+        <p class="writer-text">10年以上前に持株会から投資を始め、今は子育て中の専業主婦です。むずかしい金融の話を、毎日の暮らしに置きかえてお届けしています。</p>
+        <a class="writer-link" href="../pages/profile.html">プロフィールを見る</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<footer class="site-footer">
+  <nav class="footer-links" aria-label="フッターリンク">
+    <a href="../pages/profile.html">プロフィール</a>
+    <a href="../pages/privacy.html">プライバシーポリシー</a>
+    <a href="../pages/disclaimer.html">免責事項</a>
+    <a href="../pages/contact.html">お問い合わせ</a>
+  </nav>
+  <small>&copy; 2026 Tsumitate Lab. All rights reserved.</small>
+</footer>
+<script>
+const checkboxes = document.querySelectorAll('.check-card input');
+const progressText = document.getElementById('progress-text');
+const progressBar = document.getElementById('progress-bar');
+
+function updateProgress() {
+  const checked = document.querySelectorAll('.check-card input:checked').length;
+  const total = checkboxes.length;
+  progressText.textContent = `${checked} / ${total}`;
+  progressBar.style.width = `${Math.round((checked / total) * 100)}%`;
+}
+
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('change', updateProgress);
+});
+</script>
+</body>
+</html>
