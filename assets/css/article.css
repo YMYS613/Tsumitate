@@ -181,7 +181,7 @@
   font-size: clamp(20px, 3vw, 26px);
   margin: 0 0 16px;
   border: none;
-  color: var(--ink);
+  color: #b97956;
 }
 .cta-box h2::after { display: none; }
 .cta-box p {
@@ -190,12 +190,14 @@
   margin-bottom: 0;
 }
 .cta-accent {
-  color: var(--accent);
-  font-size: 32px;
+  color: #2f3e52;
+  font-size: clamp(24px, 4.6vw, 32px);
   font-family: 'Noto Serif JP', serif;
   font-weight: 700;
   display: block;
-  margin: 16px 0;
+  line-height: 1.5;
+  margin: 12px auto 18px;
+  text-align: center;
 }
 
 .writer-card {
